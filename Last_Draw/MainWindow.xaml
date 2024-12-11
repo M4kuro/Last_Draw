@@ -5,8 +5,339 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Last_Draw"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Last Draw"  Height="900" MaxHeight="900" MinHeight="900" Width="1200" MaxWidth="1200" MinWidth="1200" Cursor="Cross">
     <Grid>
-        
+        <!-- Main Layout -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Main UI -->
+            <RowDefinition Height="Auto" />
+            <!-- StatusBar -->
+        </Grid.RowDefinitions>
+
+
+        <!-- Main Content Area -->
+        <Grid x:Name="MainContent" Grid.Row="0">
+            <!-- Opening Screen -->
+            <Grid x:Name="OpeningScreen" Margin="0,0,-2,-1">
+                <Grid.Background>
+                    <ImageBrush Opacity="100" ImageSource="Utilities/Images/Opening.jpg"/>
+                </Grid.Background>
+
+                <Button x:Name="StartGameButton" 
+                Content="Start Game" 
+                Width="200" 
+                Height="50"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom" 
+                Margin="491,0,0,113"
+                Opacity="100" 
+                Click="StartGameButton_Click" 
+                FontFamily="Rockwell" 
+                FontWeight="Bold" 
+                FontSize="18" 
+                Background="#FFF6C786" 
+                BorderBrush="#FF10202E" 
+                Foreground="#FFCF3729">
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#FFF7DBA9"/>
+
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <MediaElement x:Name="BackgroundMusic" 
+                      Source="Utilities/Sounds/ES_Pardon My Gun - Roy Edwin Williams.wav"
+                      LoadedBehavior="Manual" 
+                      Visibility="Collapsed" />
+
+            </Grid>
+
+
+
+            <!-- Player Selection Screen -->
+            <!-- Dont forget to use  Visibility="Collapsed" -->
+            <Grid x:Name="PlayerSelectionScreen" Visibility="Collapsed" >
+                <Grid.Background>
+                    <ImageBrush ImageSource="Utilities/Images/Selection.jpg" Stretch="Fill"/>
+                </Grid.Background>
+
+
+                <Button x:Name="CassidyButton" 
+                Width="367" 
+                Height="479"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="191,143,0,0" 
+                Click="CassidyButton_Click" 
+                FontFamily="Rockwell" 
+                FontWeight="Bold" 
+                FontSize="20" >
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <!-- Background Image (Default State) -->
+                                <Image x:Name="ButtonImage" Source="Utilities/Images/Cass/Cassidy.jpg" Stretch="Fill" />
+                            </Grid>
+                            <!-- Triggers for Hover Effect -->
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <!-- Change Image on Hover -->
+                                    <Setter TargetName="ButtonImage" 
+                                    Property="Source" 
+                                    Value="Utilities/Images/Cass/Cassidy Selected No Blood.jpg" />
+
+                                    <!-- Optional Glow Effect -->
+                                    <Setter TargetName="ButtonImage" Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="300" 
+                                                      ShadowDepth="0" 
+                                                      Color="OrangeRed" 
+                                                      Opacity="0.8" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="JohnButton" 
+                Width="367" 
+                Height="479" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="639,141,0,0"
+                Click="JohnButton_Click" 
+                FontWeight="Bold" 
+                FontFamily="Rockwell" 
+                FontSize="20" >
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <!-- Background Image (Default State) -->
+                                <Image x:Name="ButtonImage" Source="Utilities/Images/John/John.jpg" Stretch="Fill" />
+                                <!-- Text -->
+                                <TextBlock Text="{TemplateBinding Content}" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Bottom" 
+                                   FontSize="20" 
+                                   FontWeight="Bold" />
+                            </Grid>
+                            <!-- Triggers for Hover Effect -->
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+
+                                    <!-- Change Image on Hover -->
+                                    <Setter TargetName="ButtonImage" 
+                                    Property="Source" 
+                                    Value="Utilities/Images/John/John Selected No Blood.jpg" />
+
+                                    <!-- Optional Glow Effect -->
+                                    <Setter TargetName="ButtonImage" Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="300" 
+                                                      ShadowDepth="0" 
+                                                      Color="OrangeRed"
+                                                      Opacity="0.8" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock Text="Choose Your Character" 
+                   FontSize="28"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" 
+                   Margin="418,33,0,0" 
+                   FontFamily="Rockwell" 
+                   FontWeight="Bold" />
+
+                <TextBlock HorizontalAlignment="Left" 
+                   Margin="315,642,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="Cassidy" 
+                   VerticalAlignment="Top" 
+                   FontFamily="Rockwell" 
+                   FontSize="28" 
+                   FontWeight="Bold"/>
+
+                <TextBlock HorizontalAlignment="Left" 
+                   Margin="796,638,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="John" 
+                   VerticalAlignment="Top" 
+                   FontWeight="Bold" 
+                   FontFamily="Rockwell" 
+                   FontSize="28" 
+                   Height="34" 
+                   Width="68"/>
+            </Grid>
+
+
+            <!-- Game Screen     Visibility="Collapsed" -->
+            <Grid x:Name="GameScreen"  Visibility="Collapsed">
+                <!-- Scenes Display -->
+                <Canvas x:Name="SceneFrame"  
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Margin="0">
+
+                    <Border CornerRadius="20" 
+                    Canvas.Left="242" 
+                    Canvas.Top="702" 
+                    Width="236" 
+                    Height="310" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top">
+
+                        <Button Content="" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        BorderThickness="0" 
+                        Width="236" 
+                        Height="309">
+
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Utilities/Images/Copas.png"/>
+                            </Button.Background>
+                        </Button>
+                    </Border>
+
+
+                    <Border CornerRadius="20" 
+                    Canvas.Left="720" 
+                    Canvas.Top="702" 
+                    Width="240" 
+                    Height="309" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+
+                        <Button Content="" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        BorderThickness="0" 
+                        Width="240" 
+                        Height="309">
+
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Utilities/Images/Espada.png"/>
+                            </Button.Background>
+                        </Button>
+                    </Border>
+
+                </Canvas>
+
+                <!-- Hud Control -->
+                <Grid x:Name="Hud" Margin="0,0,0,707">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Utilities/Images/HUD.jpg"/>
+                    </Grid.Background>
+
+                    <TextBlock x:Name="TimerText" 
+                       Text="Time: 03:00" 
+                       Foreground="Black" 
+                       FontWeight="Bold" 
+                       FontSize="26" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" 
+                       FontFamily="Rockwell" 
+                       Margin="517,0,0,0"/>
+
+
+                    <Canvas x:Name="CharSelectionRef" 
+                    Height="207" 
+                    Width="133" 
+                    Canvas.Top="-114"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="26,7,0,0">
+
+                        <!-- Picture of the selected Character-->
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="Utilities/Images/Cass/Cassidy Knife.png" Stretch="Uniform"/>
+                        </Canvas.Background>
+                    </Canvas>
+                    <!--  Attributes Control -->
+                    <StackPanel Orientation="Vertical" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left" 
+                        Height="100" 
+                        Margin="320,0,0,0" 
+                        Width="108">
+
+                        <TextBlock x:Name="HealthText" 
+                           Text="5" 
+                           FontSize="24" 
+                           FontFamily="Rockwell" 
+                           FontWeight="Bold" 
+                           Width="106" 
+                           Height="36"/>
+
+                        <TextBlock x:Name="AudacityText" 
+                           Text="5" 
+                           FontSize="24"  
+                           FontFamily="Rockwell" 
+                           FontWeight="Bold" 
+                           Width="109" 
+                           Height="38"/>
+
+                        <TextBlock x:Name="StealthText" 
+                           Text="5" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           FontFamily="Rockwell" 
+                           Height="30" 
+                           Width="108"/>
+                    </StackPanel>
+                    <Label Content="Health:" 
+                   HorizontalAlignment="Left" 
+                   Margin="214,8,0,0" 
+                   VerticalAlignment="Top" 
+                   FontWeight="Bold" 
+                   FontFamily="Rockwell" 
+                   FontSize="24"/>
+
+                    <Label Content="Audacity:" 
+                   HorizontalAlignment="Left" 
+                   Margin="187,46,0,0" 
+                   VerticalAlignment="Top"
+                   FontWeight="Bold" 
+                   FontFamily="Rockwell" 
+                   FontSize="24" 
+                   Height="39"/>
+
+                    <Label Content="Stealth:" 
+                   HorizontalAlignment="Left" 
+                   Margin="211,83,0,0" 
+                   VerticalAlignment="Top" 
+                   FontFamily="Rockwell" 
+                   FontWeight="Bold" 
+                   FontSize="24" 
+                   Height="38"/>
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <!-- StatusBar -->
+        <StatusBar Grid.Row="1" Background="#333333" Foreground="White">
+            <TextBlock x:Name="ServerStatus" Text="Server: Initializing..." FontWeight="Bold" />
+        </StatusBar>
+
     </Grid>
 </Window>
