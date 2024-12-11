@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utilities\Server Client\GameClient.cs" />
+    <Compile Include="Utilities\Server Client\GameServer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,7 +99,6 @@
   <ItemGroup>
     <Folder Include="Utilities\Images\" />
     <Folder Include="Utilities\Scenes\" />
-    <Folder Include="Utilities\Server Client\" />
     <Folder Include="Utilities\Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
